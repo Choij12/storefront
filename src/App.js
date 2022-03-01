@@ -1,25 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Products from './components/Products';
+import Categories from './components/Categories';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
+  const handleClick = e => {
+    e.preventDefault();
+    console.log(e.target.id);
+  };
+  console.log(props.allCategories.active);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <Header />
+      <Products />
+      {props.allCategories.categories.map((item, idx) => (
+        <div
+          onClick={handleClick}
+          id={item.name}
+          value={item.name}
+          name={item.name}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {item.name}
+        </div>
+      ))}
+      <Categories />
+
+      <Footer />
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    allCategories: state.categories,
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  increment: category =>
+    dispatch({ type: 'SET_ACTIVE_CATEGORY', payload: category }),
+  reset: () => dispatch({ type: 'REST_ACTIVE' }),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
