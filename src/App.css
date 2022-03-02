@@ -1,0 +1,11 @@
+.storeHeader {
+    position: relative;
+    height: 5rem;
+    width: 100%;
+    overflow: hidden;
+    background-color: #6cc4d3;
+    background-size: cover;
+    padding-bottom: 0;
+    color: rgb(81, 27, 131);
+  }
+  

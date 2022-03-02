@@ -1,45 +1,25 @@
 import './App.css';
+
+import { Provider } from 'react-redux';
+import store from './store/index.js';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Products from './components/Products';
 import Categories from './components/Categories';
-import { connect } from 'react-redux';
+import Products from './components/Products';
+import SimpleCart from './components/SimpleCart';
 
-function App(props) {
-  const handleClick = e => {
-    e.preventDefault();
-    console.log(e.target.id);
-  };
-  console.log(props.allCategories.active);
+function App() {
   return (
     <>
-      <Header />
-      <Products />
-      {props.allCategories.categories.map((item, idx) => (
-        <div
-          onClick={handleClick}
-          id={item.name}
-          value={item.name}
-          name={item.name}
-        >
-          {item.name}
-        </div>
-      ))}
-      <Categories />
-
-      <Footer />
+      <Provider store={store()}>
+        <Header />
+        <Categories />
+        <Products />
+        <SimpleCart />
+        <Footer />
+      </Provider>
     </>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    allCategories: state.categories,
-  };
-};
-const mapDispatchToProps = dispatch => ({
-  increment: category =>
-    dispatch({ type: 'SET_ACTIVE_CATEGORY', payload: category }),
-  reset: () => dispatch({ type: 'REST_ACTIVE' }),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
