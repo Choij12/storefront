@@ -1,7 +1,9 @@
 # Application State with Redux
 - Virtual Store Phase 1: For this assignment, you will be starting the process of creating an e-Commerce storefront using React with Redux, coupled with your live API server
 - Continue work on the e-Commerce storefront, breaking up the store into multiple reducers and sharing functionality/data between components.
-- Connect the Virtual Store to an API to retrieve live data from your data source, using thunk to enable asynchronous actions
+- Connect the Virtual Store to an API to retrieve live data from your data source, using thunk to enable asynchronous actions.
+- Complete work on the Virtual Store by adding detail pages for individual products as well as the the cart checkout page.
+
 
 ***Phase 1***
 - Today, we begin the first of a 4-Phase build of the storefront application, written in React. In this first phase, our goal is to setup the basic scaffolding of the application with initial styling and basic behaviors. This initial build sets up the file structure and state management so that we can progressively build this application in a scalable manner.
@@ -29,6 +31,14 @@
 
     - As a user, I want to interact with live inventory so that I have confidence that the displayed products are in stock
     - As a user, I want to know to that when I add an item to my cart, that it is removed from inventory so that no other users can purchase it
+
+***Phase 4***
+- In phase 4, we will be completing work on our Virtual Store by adding a two full page views to the application: Product Details and Checkout
+
+- The user stories from Phases 1, 2 and 3 remain unchanged. For this phase, we are now adding the following new user stories to meet the new requirements.
+
+    - As a user, I want to see a full detail view of a product so that I can make a more informed choice about purchasing it.
+    - As a user, I want to view my full cart and initiate the checkout process so that I can purchase my items and have them delivered
 
 ## Application Flow
 
