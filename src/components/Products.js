@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import { fetchProducts } from '../store/products';
 import { useEffect } from 'react';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 function Products({ products, getProducts, addToCart, decrement, categories }) {
   useEffect(() => {
@@ -15,48 +16,62 @@ function Products({ products, getProducts, addToCart, decrement, categories }) {
   console.log('ACTIVE', categories.active);
 
   return (
-    <>
-      <p>PRODUCTS</p>
-      <Grid
-        sx={{ margin: '50px 0px 0px 0px' }}
-        justifyContent="center"
-        container
-        spacing={1}
-      >
-        {products.products.map((product, idx) => {
-          return (
-            <Grid key={idx} item>
-              {' '}
-              {categories.active === parseInt(product.categoryId) ? (
-                <Card>
-                  <Button
-                    onClick={() => {
-                      decrement(product.name);
-                      addToCart(product);
-                    }}
-                  >
-                    Buy {product.name}!
-                  </Button>
-                  <Typography>{product.inventoryCount}</Typography>
-                </Card>
-              ) : null}
-            </Grid>
-          );
-        })}
-      </Grid>
-    </>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'nowrap',
+        justifyContent: 'center',
+        position: 'relative',
+        zIndex: '100',
+      }}
+    >
+      {products.products.map((product, idx) =>
+        categories.active === parseInt(product.categoryId) ? (
+          <div
+            key={idx}
+            style={{ margin: '3rem', position: 'relative', zIndex: '100' }}
+          >
+            <Card style={{ width: 350, background: 'darkGrey' }}>
+              <CardActionArea>
+                <CardMedia
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {product.description}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => {
+                    addToCart(product);
+                    decrement(product.name);
+                  }}
+                >
+                  Add to Cart
+                </Button>
+                <p>Left:{product.inventoryCount}</p>
+              </CardActions>
+            </Card>
+          </div>
+        ) : null
+      )}
+    </div>
   );
 }
 
-// layer the state to props
 const mapStateToProps = state => {
   return {
     products: state.products,
     categories: state.categories,
-    cart: state.cart,
   };
 };
-// this allows actions to be pumped through our reducer.
+
 const mapDispatchToProps = dispatch => ({
   decrement: product =>
     dispatch({ type: 'UPDATE_INVENTORY', payload: product }),
